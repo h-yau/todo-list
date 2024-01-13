@@ -1,7 +1,11 @@
 export default function addContent() {
+
+    const mainSection = document.createElement('main');
+    document.body.appendChild(mainSection);
+    
     const contentDiv = document.createElement('div');
     contentDiv.classList.add('content-div');
-    document.body.appendChild(contentDiv);
+    mainSection.appendChild(contentDiv);
 
     const title = document.createElement('p');
     title.classList.add('content-title');

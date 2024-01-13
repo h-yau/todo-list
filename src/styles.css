@@ -5,3 +5,22 @@
     margin: 0;
     padding: 0;
 }
+
+.logo-text {
+    font-size: 5rem;
+}
+
+.side-nav {
+    height: 10rem;
+    background-color: gray;
+}
+
+.content-title {
+    height: 10rem;
+    border: 1px solid blue;
+}
+
+.content-title {
+    color: green;
+    font-weight: 600;
+}
