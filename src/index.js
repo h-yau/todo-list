@@ -19,4 +19,6 @@
 //     e. project -- add project
 // 3. main content to display whatever is rendered
 
-console.log('What is you!!!');
+import initializeSite from './javascript/main.js';
+
+initializeSite();
