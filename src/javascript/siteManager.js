@@ -1,3 +1,5 @@
+import addNav from './nav.js';
+
 function createLogo() {
     const logo = document.createElement('div');
     logo.textContent = 'To Do List';
@@ -7,5 +9,5 @@ function createLogo() {
 
 export default function prepareSite() {
     createLogo();
-    
+    addNav();
 }

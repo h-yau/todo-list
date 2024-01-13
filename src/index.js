@@ -19,6 +19,7 @@
 //     e. project -- add project
 // 3. main content to display whatever is rendered
 
-import initializeSite from './javascript/main.js';
+import initializeSite from './javascript/siteManager.js';
+import './styles.css';
 
 initializeSite();
