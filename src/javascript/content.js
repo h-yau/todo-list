@@ -2,10 +2,8 @@ import todoObject from "./todoObject.js"
 
 const testObject = todoObject("Run", "Run everyday!", "Tomorrow", "None");
 
-export default function addContent() {
+const addlist = (mainSection) => {
 
-    const mainSection = document.createElement('main');
-    
     const contentDiv = document.createElement('div');
     contentDiv.classList.add('content-div');
     mainSection.appendChild(contentDiv);
@@ -29,7 +27,13 @@ export default function addContent() {
     priority.classList.add('content-priority');
     priority.textContent = testObject.getPriority();
     contentDiv.appendChild(priority);
+}
 
+export default function addContent() {
+
+    const mainSection = document.createElement('main');
+    
+    addlist(mainSection);
 
     return mainSection
 }
