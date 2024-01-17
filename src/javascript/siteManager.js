@@ -1,5 +1,4 @@
-import addNav from './nav.js';
-import addContent from './content.js';
+import createContent from "./gridContent.js";
 
 function createLogo() {
     const logo = document.createElement('div');
@@ -11,6 +10,5 @@ function createLogo() {
 
 export default function prepareSite() {
     createLogo();
-    addNav();
-    addContent();
+    createContent();
 }

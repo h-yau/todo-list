@@ -5,7 +5,6 @@ const testObject = todoObject("Run", "Run everyday!", "Tomorrow", "None");
 export default function addContent() {
 
     const mainSection = document.createElement('main');
-    document.body.appendChild(mainSection);
     
     const contentDiv = document.createElement('div');
     contentDiv.classList.add('content-div');
@@ -32,5 +31,5 @@ export default function addContent() {
     contentDiv.appendChild(priority);
 
 
-    return 
+    return mainSection
 }

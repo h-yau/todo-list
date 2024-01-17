@@ -10,9 +10,27 @@
     font-size: 5rem;
 }
 
+.content-page {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
 .side-nav {
-    height: 10rem;
     background-color: gray;
+}
+
+.nav-item {
+    margin: 1rem;
+}
+
+.task-button {
+    border: none;
+    padding: 1rem;
+    background-color: lightblue;
+}
+
+.task-button:hover {
+    cursor: pointer;
 }
 
 .content-div {
@@ -24,3 +42,4 @@
     color: green;
     font-weight: 600;
 }
+
