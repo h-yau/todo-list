@@ -18,6 +18,13 @@ const buttonListener = (button) => {
     }
 }
 
+const overlayListener = () => {
+    const overlay = document.querySelector('.overlay');
+    if (overlay) {
+        overlay.addEventListener('click', clearModule);
+    }
+}
+
 const openModule = () => {
     // needs to edit so it opens, instead of create
     createOverlay();
@@ -28,6 +35,7 @@ const createOverlay = () => {
     const overlay = document.createElement('div');
     overlay.classList.add('overlay');
     document.body.appendChild(overlay);
+    overlayListener();
 }
 
 const createModule = () => {
@@ -42,6 +50,7 @@ const createModule = () => {
     buttonListener(closeButton);
 
     const moduleForm = document.createElement('form');
+    moduleForm.classList.add('module-form');
     moduleDiv.appendChild(moduleForm);
 
     const legend = document.createElement('legend');
@@ -63,16 +72,20 @@ const createModule = () => {
     dateEntry.id = 'due-date';
     moduleForm.appendChild(dateEntry);
 
+    const checkboxContainer = document.createElement('div');
+    checkboxContainer.classList.add('checkbox-container');
+    moduleForm.appendChild(checkboxContainer);
+
     const importantLabel = document.createElement('label');
     importantLabel.htmlFor = 'important';
     importantLabel.textContent = 'Important';
-    moduleForm.appendChild(importantLabel);
+    checkboxContainer.appendChild(importantLabel);
 
     const importantCheckbox = document.createElement('input');
     importantCheckbox.type = 'checkbox';
     importantCheckbox.name = 'important';
     importantCheckbox.id = 'important';
-    moduleForm.appendChild(importantCheckbox);
+    checkboxContainer.appendChild(importantCheckbox);
 
     const submitButton = document.createElement('button');
     submitButton.classList.add('submit-form');
@@ -93,6 +106,8 @@ const removeElement = (select) => {
     const element = document.querySelector(select);
     if (element) {
         element.remove();
+    } else {
+        console.error(`Element with selector ${element} not found.`);
     }
 }
 
