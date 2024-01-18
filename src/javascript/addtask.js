@@ -1,5 +1,3 @@
-import { sub } from "date-fns";
-
 const createAddTaskButton = () => {
     
     const createTaskButton = document.createElement('button');
@@ -10,10 +8,14 @@ const createAddTaskButton = () => {
 }
 
 const buttonListener = (button) => {
+    if (button && button.className) {
 
-    button.addEventListener('click', () => {
-        openModule();
-    });
+        const buttonFunction = buttonFunctions[button.className];
+
+        if (buttonFunction && typeof buttonFunction === 'function') {
+            button.addEventListener('click', buttonFunction);
+        }
+    }
 }
 
 const openModule = () => {
@@ -37,7 +39,7 @@ const createModule = () => {
     closeButton.textContent = 'X';
     closeButton.classList.add('collapse');
     moduleDiv.appendChild(closeButton);
-    closeModuleListener(closeButton);
+    buttonListener(closeButton);
 
     const moduleForm = document.createElement('form');
     moduleDiv.appendChild(moduleForm);
@@ -77,26 +79,14 @@ const createModule = () => {
     submitButton.type = 'submit';
     submitButton.textContent = 'Submit';
     moduleForm.appendChild(submitButton);
-    submitButtonListener(submitButton);
+    buttonListener(submitButton);
 
     document.body.appendChild(moduleDiv);
-}
-
-const submitButtonListener = (button) => {
-    if (button) {
-        button.addEventListener('click', submitForm);
-    }
 }
 
 const submitForm = (e) => {
     e.preventDefault();
     alert('success!');
-}
-
-const closeModuleListener = (button) => {
-    if (button) {
-        button.addEventListener('click', clearModule);
-    }
 }
 
 const removeElement = (select) => {
@@ -109,6 +99,12 @@ const removeElement = (select) => {
 const clearModule = () => {
     removeElement('.module');
     removeElement('.overlay');
+}
+
+const buttonFunctions = {
+    'add-task-button': openModule,
+    'collapse': clearModule,
+    'submit-form': submitForm,
 }
 
 export default function prepareAddTask() {
