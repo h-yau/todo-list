@@ -15,13 +15,27 @@ const buttonListener = (button) => {
 }
 
 const openModule = () => {
+    // needs to edit so it opens, instead of create
+    createOverlay();
     createModule();
+}
+
+const createOverlay = () => {
+    const overlay = document.createElement('div');
+    overlay.classList.add('overlay');
+    document.body.appendChild(overlay);
 }
 
 const createModule = () => {
 
     const moduleDiv = document.createElement('div');
     moduleDiv.classList.add('module');
+
+    const closeButton = document.createElement('button');
+    closeButton.textContent = 'X';
+    closeButton.classList.add('collapse');
+    moduleDiv.appendChild(closeButton);
+    closeModuleListener(closeButton);
 
     const moduleForm = document.createElement('form');
     moduleDiv.appendChild(moduleForm);
@@ -40,9 +54,46 @@ const createModule = () => {
         moduleForm.appendChild(item);
     }
 
+    const dateEntry = document.createElement('input');
+    dateEntry.type = 'date';
+    dateEntry.id = 'due-date';
+    moduleForm.appendChild(dateEntry);
 
+    const importantLabel = document.createElement('label');
+    importantLabel.htmlFor = 'important';
+    importantLabel.textContent = 'Important';
+    moduleForm.appendChild(importantLabel);
+
+    const importantCheckbox = document.createElement('input');
+    importantCheckbox.type = 'checkbox';
+    importantCheckbox.name = 'important';
+    importantCheckbox.id = 'important';
+    moduleForm.appendChild(importantCheckbox);
+
+    document.body.appendChild(moduleDiv);
 }
 
-export default function addTask() {
-    
+const closeModuleListener = (button) => {
+    if (button) {
+        button.addEventListener('click', clearModule);
+    }
+}
+
+const removeElement = (select) => {
+    const element = document.querySelector(select);
+    if (element) {
+        element.remove();
+    }
+}
+
+const clearModule = () => {
+    removeElement('.module');
+    removeElement('.overlay');
+}
+
+export default function prepareAddTask() {
+    const taskButton = createAddTaskButton();
+    buttonListener(taskButton);
+    document.body.appendChild(taskButton);
+    return
 }
