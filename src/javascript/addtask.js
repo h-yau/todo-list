@@ -1,3 +1,5 @@
+import { sub } from "date-fns";
+
 const createAddTaskButton = () => {
     
     const createTaskButton = document.createElement('button');
@@ -70,7 +72,25 @@ const createModule = () => {
     importantCheckbox.id = 'important';
     moduleForm.appendChild(importantCheckbox);
 
+    const submitButton = document.createElement('button');
+    submitButton.classList.add('submit-form');
+    submitButton.type = 'submit';
+    submitButton.textContent = 'Submit';
+    moduleForm.appendChild(submitButton);
+    submitButtonListener(submitButton);
+
     document.body.appendChild(moduleDiv);
+}
+
+const submitButtonListener = (button) => {
+    if (button) {
+        button.addEventListener('click', submitForm);
+    }
+}
+
+const submitForm = (e) => {
+    e.preventDefault();
+    alert('success!');
 }
 
 const closeModuleListener = (button) => {
