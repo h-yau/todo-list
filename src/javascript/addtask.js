@@ -1,3 +1,5 @@
+import validateInputs from "./validateInput";
+
 const createAddTaskButton = () => {
     
     const createTaskButton = document.createElement('button');
@@ -16,6 +18,13 @@ const buttonListener = (button) => {
             button.addEventListener('click', buttonFunction);
         }
     }
+}
+
+const submitListener = (form) => {
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        attemptSubmit(form);
+    });
 }
 
 const overlayListener = () => {
@@ -92,14 +101,16 @@ const createModule = () => {
     submitButton.type = 'submit';
     submitButton.textContent = 'Submit';
     moduleForm.appendChild(submitButton);
-    buttonListener(submitButton);
+    submitListener(moduleForm);
 
     document.body.appendChild(moduleDiv);
 }
 
-const submitForm = (e) => {
-    e.preventDefault();
-    alert('success!');
+const attemptSubmit = (form) => {
+    const isSuccess = validateInputs(form);
+    if (isSuccess) {
+        console.log('yay!');
+    }
 }
 
 const removeElement = (select) => {
@@ -119,7 +130,6 @@ const clearModule = () => {
 const buttonFunctions = {
     'add-task-button': openModule,
     'collapse': clearModule,
-    'submit-form': submitForm,
 }
 
 export default function prepareAddTask() {
