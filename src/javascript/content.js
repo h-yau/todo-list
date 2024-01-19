@@ -1,4 +1,5 @@
 import todoObject from "./todoObject.js"
+import { tasks } from "./tasksStorage.js";
 
 const testObject = todoObject("Run", "Run everyday!", "Tomorrow", "None");
 

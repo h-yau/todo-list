@@ -1,4 +1,6 @@
 import validateInputs from "./validateInput";
+import createTask from "./createTask.js";
+import refreshContent from "./refreshContent.js";
 
 const createAddTaskButton = () => {
     
@@ -108,8 +110,13 @@ const createModule = () => {
 
 const attemptSubmit = (form) => {
     const isSuccess = validateInputs(form);
+    if (!isSuccess) {
+        console.log('Unable to add task.');
+    }
     if (isSuccess) {
-        console.log('yay!');
+        createTask(form);
+        clearModule();
+        refreshContent();
     }
 }
 

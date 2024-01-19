@@ -1,4 +1,4 @@
-export default function createTodoObject(title, description, dueDate, priority) {
+export default function todoObject(title, description, dueDate, priority) {
     
     const getTitle = () => title;
     const getDescription = () => description;
