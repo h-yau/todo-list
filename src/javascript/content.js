@@ -1,5 +1,6 @@
 import todoObject from "./todoObject.js"
 import { tasks } from "./tasksStorage.js";
+import refreshContent from "./refreshContent.js";
 
 const testObject = todoObject("Run", "Run everyday!", "Tomorrow", "None");
 
@@ -10,6 +11,12 @@ const addlist = (mainSection) => {
         const contentDiv = document.createElement('div');
         contentDiv.classList.add('content-div');
         mainSection.appendChild(contentDiv);
+
+        const closeButton = document.createElement('button');
+        closeButton.textContent = 'X';
+        closeButton.classList.add('collapse');
+        contentDiv.appendChild(closeButton);
+        closeButtonListener(closeButton, i);
     
         const title = document.createElement('p');
         title.classList.add('content-title');
@@ -37,6 +44,12 @@ const addlist = (mainSection) => {
     contentDiv.classList.add('content-div');
     mainSection.appendChild(contentDiv);
 
+    const closeButton = document.createElement('button');
+    closeButton.textContent = 'X';
+    closeButton.classList.add('collapse');
+    contentDiv.appendChild(closeButton);
+    closeButtonListener(closeButton);
+
     const title = document.createElement('p');
     title.classList.add('content-title');
     title.textContent = testObject.getTitle();
@@ -56,6 +69,15 @@ const addlist = (mainSection) => {
     priority.classList.add('content-priority');
     priority.textContent = testObject.getPriority();
     contentDiv.appendChild(priority);
+}
+
+const closeButtonListener = (button, index) => {
+    if (button) {
+        button.addEventListener('click', () =>{
+            tasks.splice(index, 1);
+            refreshContent();
+        });
+    }
 }
 
 export default function addContent() {

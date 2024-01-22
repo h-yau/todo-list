@@ -1,6 +1,7 @@
 import validateInputs from "./validateInput";
 import createTask from "./createTask.js";
 import refreshContent from "./refreshContent.js";
+import removeElement from "./removeElement.js";
 
 const createAddTaskButton = () => {
     
@@ -117,15 +118,6 @@ const attemptSubmit = (form) => {
         createTask(form);
         clearModule();
         refreshContent();
-    }
-}
-
-const removeElement = (select) => {
-    const element = document.querySelector(select);
-    if (element) {
-        element.remove();
-    } else {
-        console.error(`Element with selector ${element} not found.`);
     }
 }
 
