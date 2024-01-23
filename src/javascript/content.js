@@ -4,7 +4,7 @@ import refreshContent from "./refreshContent.js";
 
 
 // 2 lines below are tasks objects. Make sure they're deleted after testing
-const testObject = todoObject("Run", "Run everyday!", "01/21/2025", "None");
+const testObject = todoObject("Run", "Run everyday!", "01/22/2024", "None");
 storeTask(testObject);
 
 const addlist = (mainSection) => {

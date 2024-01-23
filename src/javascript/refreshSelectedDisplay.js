@@ -14,11 +14,8 @@ const filters = {
 const isDueToday = (dueDate) => {
 
     /// need testing
-    const today = format(new Date());
-    if (today == dueDate) {
-        return true
-    }
-    return false
+    const today = format(new Date(),'MM/dd/yyyy');
+    return today === dueDate;
 
 }
 
@@ -31,9 +28,11 @@ const isDueThisWeek = (dueDate) => {
 
 const filterTasks = (tabName) => {
 
-    const filterFunction = filters(tabName);
+    const filterFunction = filters[tabName];
     const filteredTasks = tasks.filter(filterFunction);
-    console.log(filterTasks);
+    filteredTasks.forEach(task => {
+        console.log(task.getTitle());
+    })
 
 }
 
