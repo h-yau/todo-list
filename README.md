@@ -1,6 +1,6 @@
 # Todo List Web App
 
-[Live demo here](https://nzxzn.github.io/todo-list/)
+[Live demo here](https://h-yau.github.io/todo-list/)
 
 A simple todo list web application with basic functionalities for managing tasks.
 
