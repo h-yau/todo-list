@@ -1,8 +1,8 @@
 import addContent from "./content";
 
-export default function refreshContent() {
+export default function refreshContent(tasksToDisplay) {
     clearMain();
-    displayMain();
+    displayMain(tasksToDisplay);
 }
 
 
@@ -15,7 +15,7 @@ const clearMain = () => {
     mainSection.remove();
 }
 
-const displayMain = () => {
+const displayMain = (tasksToDisplay) => {
     const contentPage = document.querySelector('.content-page');
-    contentPage.appendChild(addContent());
+    contentPage.appendChild(addContent(tasksToDisplay));
 }

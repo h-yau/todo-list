@@ -3,6 +3,8 @@ import refreshContent from "./refreshContent";
 
 const { format } = require("date-fns");
 
+export let filteredTasksArray = [];
+
 const filters = {
 
     "due-today": (task) => isDueToday(task.getDueDate()),
@@ -30,17 +32,15 @@ const filterTasks = (tabName) => {
 
     const filterFunction = filters[tabName];
     const filteredTasks = tasks.filter(filterFunction);
-    filteredTasks.forEach(task => {
-        console.log(task.getTitle());
-    })
+    return filteredTasks;
 
 }
 
 
 export default function refreshSelectedDisplay (tabName) {
    if (tabName == "all-tasks") {
-    refreshContent();
+    refreshContent(tasks);
    } else {
-    filterTasks(tabName);
+    refreshContent(filterTasks(tabName));
    }
 }
