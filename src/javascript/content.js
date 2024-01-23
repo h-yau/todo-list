@@ -1,8 +1,11 @@
 import todoObject from "./todoObject.js"
-import { tasks } from "./tasksStorage.js";
+import storeTask, { tasks } from "./tasksStorage.js";
 import refreshContent from "./refreshContent.js";
 
+
+// 2 lines below are tasks objects. Make sure they're deleted after testing
 const testObject = todoObject("Run", "Run everyday!", "Tomorrow", "None");
+storeTask(testObject);
 
 const addlist = (mainSection) => {
 
@@ -39,36 +42,6 @@ const addlist = (mainSection) => {
         contentDiv.appendChild(priority);
 
     }
-
-    const contentDiv = document.createElement('div');
-    contentDiv.classList.add('content-div');
-    mainSection.appendChild(contentDiv);
-
-    const closeButton = document.createElement('button');
-    closeButton.textContent = 'X';
-    closeButton.classList.add('collapse');
-    contentDiv.appendChild(closeButton);
-    closeButtonListener(closeButton);
-
-    const title = document.createElement('p');
-    title.classList.add('content-title');
-    title.textContent = testObject.getTitle();
-    contentDiv.appendChild(title);
-
-    const desc = document.createElement('p');
-    desc.classList.add('content-desc');
-    desc.textContent = testObject.getDescription();
-    contentDiv.appendChild(desc);
-
-    const dueDate = document.createElement('p');
-    dueDate.classList.add('content-due-date');
-    dueDate.textContent = testObject.getDueDate();
-    contentDiv.appendChild(dueDate);
-
-    const priority = document.createElement('p');
-    priority.classList.add('content-priority');
-    priority.textContent = testObject.getPriority();
-    contentDiv.appendChild(priority);
 }
 
 const closeButtonListener = (button, index) => {
