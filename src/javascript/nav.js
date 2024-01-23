@@ -1,3 +1,5 @@
+import handleNavButton from "./navLogicManager";
+
 export default function addNav() {
     const sideNav = document.createElement('div');
     sideNav.classList.add('side-nav');
@@ -14,6 +16,7 @@ export default function addNav() {
         taskBtn.classList.add(navItems[i].toLowerCase().replace(" ", "-"));
         taskBtn.classList.add('task-button');
         taskBtn.textContent = navItems[i];
+        handleNavButton(taskBtn);
         taskDiv.appendChild(taskBtn);
     }
 
