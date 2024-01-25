@@ -1,7 +1,7 @@
 import { tasks } from "./tasksStorage";
 import refreshContent from "./refreshContent";
 
-const { format } = require("date-fns");
+const { format, isSameWeek, lastDayOfWeek, differenceInDays, addMinutes } = require("date-fns");
 
 export let filteredTasksArray = [];
 
@@ -13,11 +13,14 @@ const filters = {
 
 }
 
+const getTodayDate = () => {
+    const today = format(new Date(), 'MM/dd/yyyy');
+    return today;
+}
+
 const isDueToday = (dueDate) => {
 
-    /// need testing
-    const today = format(new Date(),'MM/dd/yyyy');
-    return today === dueDate;
+    return dueDate == getTodayDate();
 
 }
 
@@ -25,7 +28,16 @@ const isDueThisWeek = (dueDate) => {
 
 
     // need some way to check if the date is this week
-    return false
+    let today = new Date()
+    const timeZoneOffset = today.getTimezoneOffset();
+    const utcToday = addMinutes(today, timeZoneOffset);
+
+    if (differenceInDays(dueDate, utcToday) < 0) {
+        return false;
+    }
+
+    return isSameWeek(utcToday, dueDate, { weekStartsOn: 1});
+
 }
 
 const filterTasks = (tabName) => {

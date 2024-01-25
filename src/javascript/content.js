@@ -12,6 +12,10 @@ const addlist = (tasksToDisplay) => {
 
     const mainContentDiv = document.createElement('div');
 
+    if (!tasksToDisplay) {
+        return mainContentDiv;
+    }
+
     for (let i = 0; i < tasksToDisplay.length; i++) {
 
         const contentDiv = document.createElement('div');
