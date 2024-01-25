@@ -1,7 +1,7 @@
 import { tasks } from "./tasksStorage";
 import refreshContent from "./refreshContent";
 
-const { format, isSameWeek, lastDayOfWeek, differenceInDays, addMinutes } = require("date-fns");
+const { format, isSameWeek, differenceInDays, addMinutes } = require("date-fns");
 
 export let filteredTasksArray = [];
 
