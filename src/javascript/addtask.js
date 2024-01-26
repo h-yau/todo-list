@@ -2,6 +2,7 @@ import validateInputs from "./validateInput";
 import createTask from "./createTask.js";
 import refreshContent from "./refreshContent.js";
 import removeElement from "./removeElement.js";
+import { tasks } from "./tasksStorage.js";
 
 const createAddTaskButton = () => {
     
@@ -117,7 +118,7 @@ const attemptSubmit = (form) => {
     if (isSuccess) {
         createTask(form);
         clearModule();
-        refreshContent();
+        refreshContent(tasks);
     }
 }
 

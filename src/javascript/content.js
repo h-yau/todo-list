@@ -2,10 +2,11 @@ import todoObject from "./todoObject.js"
 import storeTask, { tasks } from "./tasksStorage.js";
 import refreshContent from "./refreshContent.js";
 import { filteredTasksArray } from "./refreshSelectedDisplay.js";
+import updateTask from "./updateTask.js";
 
 
 // 2 lines below are tasks objects. Make sure they're deleted after testing
-const testObject = todoObject("Run", "Run everyday!", "01/22/2024", "None");
+const testObject = todoObject("Run", "Run everyday!", "01/28/2024", true);
 storeTask(testObject);
 
 const addlist = (tasksToDisplay) => {
@@ -43,10 +44,19 @@ const addlist = (tasksToDisplay) => {
         dueDate.textContent = tasksToDisplay[i].getDueDate();
         contentDiv.appendChild(dueDate);
     
-        const priority = document.createElement('p');
+        const priorityLabel = document.createElement('label');
+        priorityLabel.id = 'priority';
+        priorityLabel.textContent = 'Important';
+
+        const priority = document.createElement('input');
+        priority.type = 'checkbox';
+        priority.id = 'priority';
         priority.classList.add('content-priority');
-        priority.textContent = tasksToDisplay[i].getPriority();
-        contentDiv.appendChild(priority);
+        priority.checked = tasksToDisplay[i].getPriority();
+        disableCheckbox(priority);
+        priorityLabel.appendChild(priority);
+
+        contentDiv.appendChild(priorityLabel);
     }
     
     return mainContentDiv;
@@ -59,6 +69,13 @@ const closeButtonListener = (button, index) => {
             refreshContent();
         });
     }
+}
+
+const disableCheckbox = (checkbox) => {
+    checkbox.addEventListener('change', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+    })
 }
 
 export default function addContent(tasksPassedIn) {
