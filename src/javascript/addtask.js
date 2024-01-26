@@ -1,8 +1,8 @@
 import validateInputs from "./validateInput";
 import createTask from "./createTask.js";
 import refreshContent from "./refreshContent.js";
-import removeElement from "./removeElement.js";
 import { tasks } from "./tasksStorage.js";
+import { createOverlay, clearModule } from "./overlay.js";
 
 const createAddTaskButton = () => {
     
@@ -31,24 +31,10 @@ const submitListener = (form) => {
     });
 }
 
-const overlayListener = () => {
-    const overlay = document.querySelector('.overlay');
-    if (overlay) {
-        overlay.addEventListener('click', clearModule);
-    }
-}
-
 const openModule = () => {
-    // needs to edit so it opens, instead of create
+
     createOverlay();
     createModule();
-}
-
-const createOverlay = () => {
-    const overlay = document.createElement('div');
-    overlay.classList.add('overlay');
-    document.body.appendChild(overlay);
-    overlayListener();
 }
 
 const createModule = () => {
@@ -120,11 +106,6 @@ const attemptSubmit = (form) => {
         clearModule();
         refreshContent(tasks);
     }
-}
-
-const clearModule = () => {
-    removeElement('.module');
-    removeElement('.overlay');
 }
 
 const buttonFunctions = {

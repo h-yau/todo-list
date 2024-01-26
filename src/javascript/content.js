@@ -3,6 +3,7 @@ import storeTask, { tasks } from "./tasksStorage.js";
 import refreshContent from "./refreshContent.js";
 import { filteredTasksArray } from "./refreshSelectedDisplay.js";
 import updateTask from "./updateTask.js";
+import openTaskModule from "./openTaskModule.js";
 
 
 // 2 lines below are tasks objects. Make sure they're deleted after testing
@@ -22,6 +23,7 @@ const addlist = (tasksToDisplay) => {
         const contentDiv = document.createElement('div');
         contentDiv.classList.add('content-div');
         mainContentDiv.appendChild(contentDiv);
+        displayTaskModule(contentDiv, i);
 
         const closeButton = document.createElement('button');
         closeButton.textContent = 'X';
@@ -69,6 +71,12 @@ const closeButtonListener = (button, index) => {
             refreshContent();
         });
     }
+}
+
+const displayTaskModule = (taskDiv, taskIndex) => {
+    taskDiv.addEventListener('click', () => {
+        openTaskModule(taskIndex);
+    });
 }
 
 const disableCheckbox = (checkbox) => {
