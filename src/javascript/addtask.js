@@ -37,61 +37,100 @@ const openModule = () => {
     createModule();
 }
 
-const createModule = () => {
-
+const createModuleDiv = () => {
     const moduleDiv = document.createElement('div');
     moduleDiv.classList.add('module');
+    return moduleDiv;
+}
 
+const createCloseButton = () => {
     const closeButton = document.createElement('button');
     closeButton.textContent = 'X';
     closeButton.classList.add('collapse');
-    moduleDiv.appendChild(closeButton);
     buttonListener(closeButton);
+    return closeButton;
+}
 
+const createForm = () => {
     const moduleForm = document.createElement('form');
     moduleForm.classList.add('module-form');
-    moduleDiv.appendChild(moduleForm);
 
+    submitListener(moduleForm);
+
+    return moduleForm;
+}
+
+const createLegend = () => {
     const legend = document.createElement('legend');
     legend.textContent = "Add task here!"
-    moduleForm.appendChild(legend);
+    return legend;
+}
 
-    const textItems = ['Title', 'Description'];
-    
-    for (let i = 0; i < textItems.length; i++) {
-        const item = document.createElement('input');
-        item.type = "text";
-        item.placeholder = textItems[i]
-        item.id = textItems[i].toLowerCase();
-        moduleForm.appendChild(item);
-    }
+const createTitleInput = () => {
+    const title = document.createElement('input');
+    title.type = 'text';
+    title.placeholder = "Title";
+    title.id = "title";
+    return title
+}
 
+const createDescriptionInput = () => {
+    const description = document.createElement('input');
+    description.type = "text";
+    description.placeholder = 'Description'
+    description.id = 'description'
+    return description;
+}
+
+const createDateInput = () => {
     const dateEntry = document.createElement('input');
     dateEntry.type = 'date';
     dateEntry.id = 'due-date';
-    moduleForm.appendChild(dateEntry);
+    return dateEntry;
+}
 
+const createCheckboxInput = () => {
     const checkboxContainer = document.createElement('div');
     checkboxContainer.classList.add('checkbox-container');
-    moduleForm.appendChild(checkboxContainer);
 
     const importantLabel = document.createElement('label');
     importantLabel.htmlFor = 'important';
     importantLabel.textContent = 'Important';
-    checkboxContainer.appendChild(importantLabel);
 
     const importantCheckbox = document.createElement('input');
     importantCheckbox.type = 'checkbox';
     importantCheckbox.name = 'important';
     importantCheckbox.id = 'important';
-    checkboxContainer.appendChild(importantCheckbox);
 
+    checkboxContainer.appendChild(importantCheckbox);
+    checkboxContainer.appendChild(importantLabel);
+
+    return checkboxContainer;
+}
+
+const createSubmitButton = () => {
     const submitButton = document.createElement('button');
     submitButton.classList.add('submit-form');
     submitButton.type = 'submit';
     submitButton.textContent = 'Submit';
-    moduleForm.appendChild(submitButton);
-    submitListener(moduleForm);
+    return submitButton;
+}
+
+const createModule = () => {
+
+    const moduleDiv = createModuleDiv();
+    const closeButton = createCloseButton();
+    const moduleForm = createForm();
+
+    moduleDiv.appendChild(closeButton);
+    moduleDiv.appendChild(moduleForm);
+
+    moduleForm.appendChild(createLegend());
+    moduleForm.appendChild(createTitleInput());
+    moduleForm.appendChild(createDescriptionInput());
+    moduleForm.appendChild(createDateInput());
+    moduleForm.appendChild(createCheckboxInput());
+    moduleForm.appendChild(createSubmitButton());
 
     document.body.appendChild(moduleDiv);
 }
@@ -119,3 +158,5 @@ export default function prepareAddTask() {
     document.body.appendChild(taskButton);
     return
 }
+
+export {createModule};
