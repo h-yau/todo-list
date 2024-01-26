@@ -72,7 +72,7 @@ const closeButtonListener = (button, index) => {
 }
 
 const disableCheckbox = (checkbox) => {
-    checkbox.addEventListener('change', (e) => {
+    checkbox.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
     })
