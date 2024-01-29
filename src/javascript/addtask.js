@@ -3,6 +3,7 @@ import createTask from "./createTask.js";
 import refreshContent from "./refreshContent.js";
 import { tasks } from "./tasksStorage.js";
 import { createOverlay, clearModule } from "./overlay.js";
+import updateTask from "./updateTask.js";
 
 const { format } = require("date-fns");
 
@@ -36,6 +37,13 @@ const submitListener = (form) => {
     });
 }
 
+const updateListener = (form, index) => {
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        attemptSubmit(form, index);
+    });
+}
+
 const openModule = () => {
 
     createOverlay();
@@ -61,6 +69,15 @@ const createForm = () => {
     moduleForm.classList.add('module-form');
 
     submitListener(moduleForm);
+
+    return moduleForm;
+}
+
+const createUpdateForm = (index) => {
+    const moduleForm = document.createElement('form');
+    moduleForm.classList.add('module-form');
+
+    updateListener(moduleForm, index);
 
     return moduleForm;
 }
@@ -98,6 +115,7 @@ const createDateInput = (taskDueDate) => {
     dateEntry.type = 'date';
     dateEntry.id = 'due-date';
     if (taskDueDate) {
+
         // dates need reformatting so it can appear on the display form
         dateEntry.value = format(taskDueDate, 'yyyy-MM-dd');
     }
@@ -139,7 +157,7 @@ const createUpdateModule = (index) => {
 
     const moduleDiv = createModuleDiv();
     const closeButton = createCloseButton();
-    const moduleForm = createForm();
+    const moduleForm = createUpdateForm(index);
 
     moduleDiv.appendChild(closeButton);
     moduleDiv.appendChild(moduleForm);
@@ -149,8 +167,7 @@ const createUpdateModule = (index) => {
     moduleForm.appendChild(createDescriptionInput(tasks[index].getDescription()));
     moduleForm.appendChild(createDateInput(tasks[index].getDueDate()));
     moduleForm.appendChild(createCheckboxInput(tasks[index].getPriority()));
-
-    // only need a updateButton now
+    moduleForm.appendChild(createSubmitButton());
 
 
     document.body.appendChild(moduleDiv);
@@ -176,13 +193,18 @@ const createModule = () => {
 }
 
 
-const attemptSubmit = (form) => {
+const attemptSubmit = (form, index) => {
     const isSuccess = validateInputs(form);
     if (!isSuccess) {
         console.log('Unable to add task.');
     }
-    if (isSuccess) {
+    if (isSuccess && (index == null || index == undefined)) {
         createTask(form);
+        clearModule();
+        refreshContent(tasks);
+    }
+    if (isSuccess && (index != null || index != undefined)) {
+        updateTask(form, index);
         clearModule();
         refreshContent(tasks);
     }
