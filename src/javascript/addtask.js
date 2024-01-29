@@ -19,7 +19,10 @@ const buttonListener = (button) => {
         const buttonFunction = buttonFunctions[button.className];
 
         if (buttonFunction && typeof buttonFunction === 'function') {
-            button.addEventListener('click', buttonFunction);
+            button.addEventListener('click', (event) => {
+                event.stopPropagation();
+                buttonFunction();
+            });
         }
     }
 }

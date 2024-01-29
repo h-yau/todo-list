@@ -74,7 +74,12 @@ const closeButtonListener = (button, index) => {
 }
 
 const displayTaskModule = (taskDiv, taskIndex) => {
-    taskDiv.addEventListener('click', () => {
+    taskDiv.addEventListener('click', (event) => {
+        console.log(event.target);
+        if (event.target.classList.contains('collapse')) {
+            event.stopPropagation();
+            return;
+        }
         openTaskModule(taskIndex);
     });
 }

@@ -15,6 +15,8 @@ const filters = {
 
 const getTodayDate = () => {
 
+    // does not need to convert since local machine's time is corecct
+
     const today = new Date();
     const formattedToday = format(today, "MM/dd/yyyy");
     return formattedToday;
@@ -28,8 +30,6 @@ const isDueToday = (dueDate) => {
 
 const isDueThisWeek = (dueDate) => {
 
-
-    // need some way to check if the date is this week
     const today = format(new Date(), "MM/dd/yyyy");
 
     if (differenceInDays(dueDate, today) < 0) {
