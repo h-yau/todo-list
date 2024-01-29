@@ -1,11 +1,11 @@
 import { createOverlay } from "./overlay";
-import { createModule } from "./addtask";
+import { createUpdateModule } from "./addtask";
 import { tasks } from "./tasksStorage";
 
 const createTaskModule = (index) => {
 
     ////// now I need to display the tasks
-    createModule();
+    createUpdateModule(index);
     console.log(tasks[index].getTitle());
 }
 

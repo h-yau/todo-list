@@ -14,8 +14,10 @@ const filters = {
 }
 
 const getTodayDate = () => {
-    const today = format(new Date(), 'MM/dd/yyyy');
-    return today;
+
+    const today = new Date();
+    const formattedToday = format(today, "MM/dd/yyyy");
+    return formattedToday;
 }
 
 const isDueToday = (dueDate) => {
@@ -28,15 +30,13 @@ const isDueThisWeek = (dueDate) => {
 
 
     // need some way to check if the date is this week
-    let today = new Date()
-    const timeZoneOffset = today.getTimezoneOffset();
-    const utcToday = addMinutes(today, timeZoneOffset);
+    const today = format(new Date(), "MM/dd/yyyy");
 
-    if (differenceInDays(dueDate, utcToday) < 0) {
+    if (differenceInDays(dueDate, today) < 0) {
         return false;
     }
 
-    return isSameWeek(utcToday, dueDate, { weekStartsOn: 1});
+    return isSameWeek(today, dueDate, { weekStartsOn: 1});
 
 }
 

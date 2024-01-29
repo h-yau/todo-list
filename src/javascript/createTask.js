@@ -7,9 +7,9 @@ export default function createTask(form) {
     const title = form.querySelector('#title').value;
     const description = form.querySelector('#description').value;
 
+    // to convert time to local time so there's no 1-day discrepency  
     const localDueDate = new Date(form.querySelector('#due-date').value);
-    const timeZoneOffset = localDueDate.getTimezoneOffset();
-    const utcDueDate = addMinutes(localDueDate, timeZoneOffset);
+    const utcDueDate = new Date( localDueDate.valueOf() + localDueDate.getTimezoneOffset() * 60 * 1000);
     const formattedDueDate = format(utcDueDate, 'MM/dd/yyyy');
 
     const priority = form.querySelector('#important').checked;

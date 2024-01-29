@@ -116,6 +116,22 @@ const createSubmitButton = () => {
     return submitButton;
 }
 
+const createUpdateModule = (index) => {
+
+    const moduleDiv = createModuleDiv();
+    const closeButton = createCloseButton();
+    const moduleForm = createForm();
+
+    moduleDiv.appendChild(closeButton);
+    moduleDiv.appendChild(moduleForm);
+
+    // want to be able to pass in an index and look for the task... so can't just copy and paste
+
+
+
+    document.body.appendChild(moduleDiv);
+}
+
 const createModule = () => {
 
     const moduleDiv = createModuleDiv();
@@ -134,6 +150,7 @@ const createModule = () => {
 
     document.body.appendChild(moduleDiv);
 }
+
 
 const attemptSubmit = (form) => {
     const isSuccess = validateInputs(form);
@@ -159,4 +176,4 @@ export default function prepareAddTask() {
     return
 }
 
-export {createModule};
+export {createUpdateModule};
