@@ -4,6 +4,8 @@ import refreshContent from "./refreshContent.js";
 import { tasks } from "./tasksStorage.js";
 import { createOverlay, clearModule } from "./overlay.js";
 
+const { format } = require("date-fns");
+
 const createAddTaskButton = () => {
     
     const createTaskButton = document.createElement('button');
@@ -63,36 +65,46 @@ const createForm = () => {
     return moduleForm;
 }
 
-const createLegend = () => {
+const createLegend = (message) => {
     const legend = document.createElement('legend');
-    legend.textContent = "Add task here!"
+    legend.textContent = message;
     return legend;
 }
 
-const createTitleInput = () => {
+const createTitleInput = (taskTitle) => {
     const title = document.createElement('input');
     title.type = 'text';
     title.placeholder = "Title";
     title.id = "title";
+    if (taskTitle) {
+        title.value = taskTitle;
+    }
     return title
 }
 
-const createDescriptionInput = () => {
+const createDescriptionInput = (taskDescription) => {
     const description = document.createElement('input');
     description.type = "text";
     description.placeholder = 'Description'
     description.id = 'description'
+    if (taskDescription) {
+        description.value = taskDescription;
+    }
     return description;
 }
 
-const createDateInput = () => {
+const createDateInput = (taskDueDate) => {
     const dateEntry = document.createElement('input');
     dateEntry.type = 'date';
     dateEntry.id = 'due-date';
+    if (taskDueDate) {
+        // dates need reformatting so it can appear on the display form
+        dateEntry.value = format(taskDueDate, 'yyyy-MM-dd');
+    }
     return dateEntry;
 }
 
-const createCheckboxInput = () => {
+const createCheckboxInput = (taskImportance) => {
     const checkboxContainer = document.createElement('div');
     checkboxContainer.classList.add('checkbox-container');
 
@@ -107,6 +119,10 @@ const createCheckboxInput = () => {
 
     checkboxContainer.appendChild(importantCheckbox);
     checkboxContainer.appendChild(importantLabel);
+
+    if (taskImportance) {
+        importantCheckbox.checked = taskImportance;
+    }
 
     return checkboxContainer;
 }
@@ -128,8 +144,13 @@ const createUpdateModule = (index) => {
     moduleDiv.appendChild(closeButton);
     moduleDiv.appendChild(moduleForm);
 
-    // want to be able to pass in an index and look for the task... so can't just copy and paste
+    moduleForm.appendChild(createLegend('Update task!'));
+    moduleForm.appendChild(createTitleInput(tasks[index].getTitle()));
+    moduleForm.appendChild(createDescriptionInput(tasks[index].getDescription()));
+    moduleForm.appendChild(createDateInput(tasks[index].getDueDate()));
+    moduleForm.appendChild(createCheckboxInput(tasks[index].getPriority()));
 
+    // only need a updateButton now
 
 
     document.body.appendChild(moduleDiv);
@@ -144,7 +165,7 @@ const createModule = () => {
     moduleDiv.appendChild(closeButton);
     moduleDiv.appendChild(moduleForm);
 
-    moduleForm.appendChild(createLegend());
+    moduleForm.appendChild(createLegend('Add task here!'));
     moduleForm.appendChild(createTitleInput());
     moduleForm.appendChild(createDescriptionInput());
     moduleForm.appendChild(createDateInput());
