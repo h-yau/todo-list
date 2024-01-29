@@ -20,7 +20,9 @@ export default function todoObject(title, description, dueDate, priority) {
         _description = newDescription;
     };
     const setDueDate = (newDueDate) => {
-        const formattedNewDueDate = format(newDueDate, 'MM/dd/yyyy');
+        const localDueDate = new Date(newDueDate);
+        const utcDueDate = new Date( localDueDate.valueOf() + localDueDate.getTimezoneOffset() * 60 * 1000);
+        const formattedNewDueDate = format(utcDueDate, 'MM/dd/yyyy');
         _dueDate = formattedNewDueDate;
     }
     const setPriority = (newPriority) => {
