@@ -22,4 +22,15 @@
 import initializeSite from './javascript/siteManager.js';
 import './styles.css';
 
+import storageAvailable from './javascript/localStorage.js';
+
+
 initializeSite();
+
+
+
+if (storageAvailable('localStorage')) {
+    console.log("YES!");
+} else {
+    console.log('NO!!!');
+}
