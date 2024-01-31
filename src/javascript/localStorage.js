@@ -74,7 +74,6 @@ export function retrieveLocalStoredTasks() {
         const storedTasks = localStorage.getItem?.('tasks');
         const parsedTasks = JSON.parse(storedTasks);
         for (let i = 0; i < parsedTasks.length; i++) {
-            console.log(parsedTasks);
             const task = todoObject(parsedTasks[i].title, parsedTasks[i].description, parsedTasks[i].dueDate, parsedTasks[i].priority);
             storeTask(task);
         }
