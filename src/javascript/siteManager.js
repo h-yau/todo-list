@@ -1,5 +1,6 @@
 import createContent from "./gridContent.js";
 import addTask from "./addtask.js";
+import storeLocalTasks, { retrieveLocalStoredTasks } from "./localStorage.js";
 
 
 function createLogo() {
@@ -12,6 +13,8 @@ function createLogo() {
 
 export default function prepareSite() {
     createLogo();
+    retrieveLocalStoredTasks();
     createContent();
     addTask();
+    storeLocalTasks();
 }

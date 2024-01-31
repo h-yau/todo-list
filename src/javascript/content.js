@@ -1,14 +1,8 @@
 import todoObject from "./todoObject.js"
 import storeTask, { tasks } from "./tasksStorage.js";
 import refreshContent from "./refreshContent.js";
-import { filteredTasksArray } from "./refreshSelectedDisplay.js";
-import updateTask from "./updateTask.js";
 import openTaskModule from "./openTaskModule.js";
-
-
-// 2 lines below are tasks objects. Make sure they're deleted after testing
-const testObject = todoObject("Run", "Run everyday!", "01/28/2024", true);
-storeTask(testObject);
+import storeLocalTasks from "./localStorage.js";
 
 const addlist = (tasksToDisplay) => {
 
@@ -68,6 +62,7 @@ const closeButtonListener = (button, index) => {
     if (button) {
         button.addEventListener('click', () =>{
             tasks.splice(index, 1);
+            storeLocalTasks();
             refreshContent();
         });
     }

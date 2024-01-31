@@ -4,6 +4,7 @@ import refreshContent from "./refreshContent.js";
 import { tasks } from "./tasksStorage.js";
 import { createOverlay, clearModule } from "./overlay.js";
 import updateTask from "./updateTask.js";
+import storeLocalTasks from "./localStorage.js";
 
 const { format } = require("date-fns");
 
@@ -200,11 +201,13 @@ const attemptSubmit = (form, index) => {
     }
     if (isSuccess && (index == null || index == undefined)) {
         createTask(form);
+        storeLocalTasks();
         clearModule();
         refreshContent(tasks);
     }
     if (isSuccess && (index != null || index != undefined)) {
         updateTask(form, index);
+        storeLocalTasks();
         clearModule();
         refreshContent(tasks);
     }
